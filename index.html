@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Music Chart</title>
+    <script
+      src="https://kit.fontawesome.com/a6182922f0.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="song.js" defer></script>
+    <script src="music-top.js" defer></script>
+    <script src="ui.js" defer></script>
+    <script src="app.js" defer></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <section class="container flex-center">
+      <div class="wrapper flex-center">
+        <h1>Music Top Songs</h1>
+        <div class="form-wrapper">
+          <form id="add-form">
+            <label for="song">Song: </label>
+            <input type="text" name="song" id="song" />
+            <label for="artist">Artist: </label>
+            <input type="text" name="artist" id="artist" />
+            <div class="actions">
+              <button id="submit-btn" class="btn" type="button">
+                Add song
+              </button>
+            </div>
+          </form>
+        </div>
+        <div class="top-wrapper">
+          <ul class="songs-list"></ul>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
