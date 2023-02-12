@@ -10,13 +10,12 @@ class MusicTop {
   getTop() {
     const sortedArr = this.#songs.sort((a, b) => {
       if (a.votes === b.votes) {
-        return new Date(b.entryTopDate) - new Date(a.entryTopDate);
+        return new Date(b.date) - new Date(a.date);
       } else {
         return b.votes - a.votes;
       }
     });
     this.storage.addToStorage(sortedArr);
-    // return this.#songs;
     return sortedArr;
   }
 

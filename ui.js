@@ -8,7 +8,7 @@ class HtmlSong extends Song {
             <h5>${song.artist}</h5>
           </div>
           <div>
-            <p>Date added: ${song.entryTopDate}</p>
+            <p>Date added: ${song.date}</p>
             
           </div>
         </div>
