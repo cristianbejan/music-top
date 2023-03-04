@@ -1,0 +1,32 @@
+{
+  "songs": [
+    {
+      "id": 1,
+      "name": "Test_1",
+      "artist": "Test-1",
+      "date": "04/03/2023, 13:55:25",
+      "votes": 12
+    },
+    {
+      "id": 2,
+      "name": "Test_2",
+      "artist": "Test-2",
+      "date": "04/03/2023, 13:56:25",
+      "votes": 14
+    },
+    {
+      "id": 3,
+      "name": "Test_3",
+      "artist": "Test-3",
+      "date": "04/03/2023, 13:57:25",
+      "votes": 11
+    },
+    {
+      "name": "Hanul Marioarei",
+      "artist": "Plaiesii",
+      "votes": 1,
+      "date": "05/03/2023, 01:06:48",
+      "id": 4
+    }
+  ]
+}

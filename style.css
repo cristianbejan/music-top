@@ -133,3 +133,7 @@ ul {
   flex-direction: column;
   gap: 0.5rem;
 }
+
+.top-wrapper .songs-list .item-list .fa-xmark {
+  color: #e64646;
+}

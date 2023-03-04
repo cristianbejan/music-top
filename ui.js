@@ -8,33 +8,33 @@ class HtmlSong extends Song {
             <h5>${song.artist}</h5>
           </div>
           <div>
-            <p>Date added: ${song.entryTopDate}</p>
+            <p>Date added: ${song.date}</p>
             
           </div>
         </div>
         <div class="vote flex-center">
-          <button type="button" class="btn vote-btn" name='${
-            song.uid
-          }' >Vote</button>
-          <p>${song.getVoteCount()} votes</p>
+            <button type="button" class="btn vote-btn" data-id='${song.id}' >Vote</button>
+          <p>${song.votes} votes</p>
         </div>
+        <i class="fa-solid fa-xmark" data-uid='${song.id}'></i>
     `;
   }
 }
 
 class MusicTopHtmlGenerator {
-  static getHtml(musicTopArr) {
+  static async getHtml(musicTopArr) {
     let displayTop = ``;
     const htmlSong = new HtmlSong();
 
-    musicTopArr.getTop().forEach((item, index) => {
-      console.log("item: ", item);
+    let musicTop = await musicTopArr.getTop();
+
+    musicTop.forEach((item, index) => {
       displayTop += `
-          <li class="item-list flex-center">
-            <span>${index + 1}</span>
-            ${htmlSong.getHtml(item)}
-          </li>
-      `;
+            <li class="item-list flex-center">
+              <span>${index + 1}</span>
+              ${htmlSong.getHtml(item)}
+            </li>
+        `;
     });
 
     return displayTop;

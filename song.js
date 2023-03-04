@@ -1,17 +1,18 @@
 class Song {
-  constructor(name, artist) {
-    this.uid = (Math.random() + 1).toString(36).substring(7);
-    this.name = name;
-    this.artist = artist;
-  }
-
   #entryTopDate = new Date();
   #votes = 0;
 
-  vote() {
-    this.#votes++;
+  constructor(name, artist, votes, date) {
+    this.name = name;
+    this.artist = artist;
+    this.votes = !votes ? 0 : votes;
+    this.date = !date ? new Date().toLocaleString("en-GB") : date;
   }
 
+  vote() {
+    this.votes++;
+    this.#votes++;
+  }
   getVoteCount() {
     return this.#votes;
   }

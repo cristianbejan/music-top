@@ -1,0 +1,12 @@
+{
+  "name": "music_top",
+  "version": "1.0.0",
+  "description": "'Best music in the world'",
+  "main": "app.js",
+  "scripts": {
+    "server": "json-server --watch db.json"
+  },
+  "dependencies": {
+    "json-server": "^0.17.2"
+  }
+}

@@ -4,6 +4,11 @@ const artistInput = document.querySelector("#artist");
 const submitBtn = document.querySelector("#submit-btn");
 
 const musicTop = new MusicTop();
+const server = new Server();
+
+window.addEventListener("DOMContentLoaded", async () => {
+  list.innerHTML = await MusicTopHtmlGenerator.getHtml(musicTop);
+});
 
 submitBtn.addEventListener("click", (e) => {
   e.preventDefault();
@@ -16,20 +21,6 @@ artistInput.addEventListener("keypress", (e) => {
     addSong();
     artistInput.blur();
   }
-});
-
-// Implement the voting functionality
-
-list.addEventListener("click", (e) => {
-  const targetSong = musicTop.getSong(e.target.name);
-
-  if (!targetSong) {
-    return;
-  }
-
-  targetSong.vote();
-  const musicTopHtml = MusicTopHtmlGenerator.getHtml(musicTop);
-  list.innerHTML = musicTopHtml;
 });
 
 function addSong() {
@@ -60,9 +51,34 @@ function addSong() {
   const song = new Song(songInput.value, artistInput.value);
   musicTop.addSong(song);
 
-  const musicTopHtml = MusicTopHtmlGenerator.getHtml(musicTop);
-  list.innerHTML = musicTopHtml;
-
   songInput.value = "";
   artistInput.value = "";
 }
+
+// Implement the voting functionality
+
+list.addEventListener("click", async (e) => {
+  const targetSongId = e.target.dataset["id"];
+
+  if (!targetSongId) {
+    return;
+  }
+  let targetSong = await server.getSong(targetSongId);
+  const newVoteValue = targetSong.votes + 1;
+
+  server.updateVotes(newVoteValue, targetSongId);
+});
+
+// Remove song from list
+
+list.addEventListener("click", async (e) => {
+  const targetSongId = e.target.dataset["uid"];
+
+  if (!targetSongId) {
+    return;
+  }
+
+  if (window.confirm("Are you sure?")) {
+    server.deleteSong(targetSongId);
+  }
+});
