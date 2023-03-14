@@ -20,8 +20,27 @@
     <section class="container flex-center">
       <div class="wrapper flex-center">
         <h1>Music Top Songs</h1>
+        <div class="top-wrapper">
+          <div class="filter flex-center">
+            <input
+              type="text"
+              name="filter"
+              id="filter"
+              placeholder="Search by song name or artist"
+            />
+            <button id="filter-btn" class="btn" type="button">Search</button>
+            <button id="clear-filter" class="btn cancel-btn" type="button">
+              Clear
+            </button>
+          </div>
+          <ul class="songs-list"></ul>
+        </div>
         <div class="form-wrapper">
-          <form id="add-form">
+          <div class="add-song">
+            <i class="fa-solid fa-square-plus fa-2x"></i>
+            <span>Add new song</span>
+          </div>
+          <form id="add-form" class="add-form">
             <label for="song">Song: </label>
             <input type="text" name="song" id="song" />
             <label for="artist">Artist: </label>
@@ -30,11 +49,11 @@
               <button id="submit-btn" class="btn" type="button">
                 Add song
               </button>
+              <button id="cancel-btn" class="btn cancel-btn" type="button">
+                Cancel
+              </button>
             </div>
           </form>
-        </div>
-        <div class="top-wrapper">
-          <ul class="songs-list"></ul>
         </div>
       </div>
     </section>

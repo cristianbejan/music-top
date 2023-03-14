@@ -25,6 +25,12 @@ class Server {
     });
   }
 
+  filterSong(query) {
+    const url = `${BASE_URL}/songs?q=${query}`;
+
+    return fetch(url).then((result) => result.json());
+  }
+
   updateVotes(newValue, id) {
     const url = `${BASE_URL}/songs/${id}`;
 
@@ -36,6 +42,18 @@ class Server {
       body: JSON.stringify({
         votes: newValue,
       }),
+    });
+  }
+
+  editSong(payload, id) {
+    const url = `${BASE_URL}/songs/${id}`;
+
+    return fetch(url, {
+      method: "PATCH",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify(payload),
     });
   }
 
