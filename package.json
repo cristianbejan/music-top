@@ -2,9 +2,10 @@
   "name": "music_top",
   "version": "1.0.0",
   "description": "'Best music in the world'",
-  "main": "app.js",
+  "main": "heroku-server.js",
   "scripts": {
-    "server": "json-server --watch db.json"
+    "server": "json-server --watch db.json",
+    "start": "node heroku-server.js"
   },
   "dependencies": {
     "json-server": "^0.17.2"
