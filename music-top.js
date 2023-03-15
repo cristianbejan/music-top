@@ -1,6 +1,6 @@
 class MusicTop {
   addSong(song) {
-    server.addSong(song);
+    server.addSong(song).then(async () => await getTop());
   }
 
   async getTop() {

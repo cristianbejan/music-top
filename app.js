@@ -11,6 +11,7 @@ const searchInput = document.querySelector("#filter");
 
 let editSongId = null;
 let editMode = false;
+let topSongs = null;
 
 const musicTop = new MusicTop();
 const server = new Server();
@@ -59,6 +60,7 @@ searchInput.addEventListener("keydown", (e) => {
 // Get top
 async function getTop() {
   let getMusicTop = await musicTop.getTop();
+  topSongs = getMusicTop;
   list.innerHTML = await MusicTopHtmlGenerator.getHtml(getMusicTop);
 }
 
@@ -92,6 +94,7 @@ function addSong() {
   musicTop.addSong(song);
 
   clearForm();
+  hideForm();
 }
 
 // Search by name or artist
@@ -117,7 +120,14 @@ async function filterSong() {
   if (filteredData.length === 0) {
     list.innerHTML = "Nothing found. Please try different keyword.";
   } else {
-    list.innerHTML = await MusicTopHtmlGenerator.getHtml(filteredData);
+    const sortedFilteredData = filteredData.sort((a, b) => {
+      if (a.votes === b.votes) {
+        return new Date(b.date) - new Date(a.date);
+      } else {
+        return b.votes - a.votes;
+      }
+    });
+    list.innerHTML = await MusicTopHtmlGenerator.getHtml(sortedFilteredData);
   }
 }
 
@@ -131,7 +141,11 @@ async function vote(e) {
   let targetSong = await server.getSong(targetSongId);
   const newVoteValue = targetSong.votes + 1;
 
-  server.updateVotes(newVoteValue, targetSongId);
+  server
+    .updateVotes(newVoteValue, targetSongId)
+    .then(async () => await getTop());
+
+  searchInput.value = "";
 }
 
 // Remove song from list
@@ -143,7 +157,7 @@ function removeSong(e) {
   }
 
   if (window.confirm("Are you sure?")) {
-    server.deleteSong(targetSongId);
+    server.deleteSong(targetSongId).then(async () => await getTop());
   }
 }
 
@@ -179,10 +193,13 @@ function saveEditedSong() {
     artist: artistInput.value,
   };
 
-  server.editSong(payload, editSongId);
+  server.editSong(payload, editSongId).then(async () => await getTop());
 
   editMode = false;
   submitBtn.textContent = "Add Song";
+
+  clearForm();
+  hideForm();
 }
 
 // Show form
@@ -209,12 +226,12 @@ function clearForm() {
 }
 
 // Clear search input
-function clearSearchInput() {
+async function clearSearchInput() {
   if (!searchInput.value) {
     return;
   }
 
+  list.innerHTML = await MusicTopHtmlGenerator.getHtml(topSongs);
   searchInput.value = "";
   filterBtn.disabled = false;
-  getTop();
 }
