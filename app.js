@@ -21,6 +21,8 @@ window.addEventListener("DOMContentLoaded", () => getTop());
 submitBtn.addEventListener("click", (e) => {
   e.preventDefault();
   editMode ? saveEditedSong() : addSong();
+
+  scrollToBottom();
 });
 
 artistInput.addEventListener("keypress", (e) => {
@@ -234,4 +236,9 @@ async function clearSearchInput() {
   list.innerHTML = await MusicTopHtmlGenerator.getHtml(topSongs);
   searchInput.value = "";
   filterBtn.disabled = false;
+}
+
+function scrollToBottom() {
+  let listNodes = document.querySelectorAll("li");
+  listNodes[listNodes.length - 1].scrollIntoView(false);
 }
