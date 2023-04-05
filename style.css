@@ -40,10 +40,6 @@ ul {
   background-color: rgb(124, 36, 36, 0.8);
 }
 
-i:hover {
-  cursor: pointer;
-}
-
 .flex-center {
   display: flex;
   justify-content: center;
@@ -86,6 +82,7 @@ i:hover {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  width: fit-content;
 }
 
 .form-wrapper .add-song i {
@@ -154,7 +151,7 @@ i:hover {
   flex-direction: column;
   width: 100%;
   margin-top: 1rem;
-  max-height: 35vh;
+  max-height: 40vh;
   overflow-y: auto;
 }
 
@@ -203,6 +200,11 @@ i:hover {
 
 .top-wrapper .songs-list .item-list .fa-xmark {
   color: #e64646;
+}
+
+.top-wrapper .songs-list .item-list .fa-pen-to-square:hover,
+.top-wrapper .songs-list .item-list .fa-xmark:hover {
+  cursor: pointer;
 }
 
 /* Scrollbar */

@@ -16,8 +16,8 @@ class HtmlSong extends Song {
             <button type="button" class="btn vote-btn" data-id='${song.id}' >Vote</button>
           <p>${song.votes} votes</p>
         </div>
-        <i class="fa-regular fa-pen-to-square" data-update='${song.id}'></i>
-        <i class="fa-solid fa-xmark" data-delete='${song.id}'></i>
+        <i class="fa-regular fa-pen-to-square" title="Edit song" data-update='${song.id}'></i>
+        <i class="fa-solid fa-xmark" title="Remove song" data-delete='${song.id}'></i>
 
     `;
   }
